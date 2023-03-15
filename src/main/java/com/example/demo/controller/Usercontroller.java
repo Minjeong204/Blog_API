@@ -29,7 +29,6 @@ public class Usercontroller {
 	@PostMapping(path = "/login")
 	public ResponseEntity<Object> signin(@RequestBody User user) {
 		User entity = userService.login(user);
-
 		return new ResponseEntity<Object>(entity, HttpStatus.OK);
 	}
 }
