@@ -6,16 +6,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.demo.model.User;
 import com.example.demo.repository.Userrepository;
+import com.example.demo.service.Postservice;
+import com.example.demo.service.Userservice;
 
 @SpringBootTest
 class BlogApplicationTests {
 	@Autowired
 	private Userrepository userRepository;
+	@Autowired
+	private Postservice postservice;
+
 	@Test
 	void contextLoads() {
-		User user = new User();
-		User user2 = userRepository.findByUserIdAndPassword("anjell0204","mark0809*");
-		System.out.println(user2);
+
+		System.out.println(postservice.view().get(0).getPostId());
 	}
 
 }
