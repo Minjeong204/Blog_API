@@ -16,7 +16,7 @@ public class Postservice {
 	private Postrepository postrepository;
 
 	public List<Post> view() {
-		List<Post> posts = postrepository.findAll();
+		List<Post> posts = postrepository.findByUseYn("Y");
 		return posts;
 	}
 
@@ -25,7 +25,11 @@ public class Postservice {
 		LocalDateTime date = LocalDateTime.now();
 		post.setRegiDt(date);
 		post.setPostId(random.nextInt(900));
-		post.setCategory("여행");
 		return postrepository.save(post);
+	}
+
+	public List<Post> diary(String category) {
+		List<Post> posts = postrepository.findByCategory(category);
+		return posts;
 	}
 }
