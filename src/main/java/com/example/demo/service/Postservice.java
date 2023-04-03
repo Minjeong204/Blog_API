@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,29 @@ public class Postservice {
 	}
 
 	public List<Post> diary(String category) {
-		List<Post> posts = postrepository.findByCategory(category);
+		List<Post> posts = postrepository.findByUseYnAndCategory("Y", category);
 		return posts;
+	}
+
+	public void delete(Post post) {
+		int id = post.getPostId();
+		postrepository.deleteById(id);
+	}
+
+	public Post find(Post post) {
+		int id = post.getPostId();
+		System.out.println(postrepository.findById(id));
+		return postrepository.findById(id);
+	}
+
+	public Post update(Post post) {
+		Post post2 = postrepository.findById(post.getPostId());
+		post2.setCategory(post.getCategory());
+		post2.setContent(post.getContent());
+		post2.setTitle(post.getTitle());
+		post2.setUseYn(post.getUseYn());
+		post2.setUpdaDt(LocalDateTime.now());
+
+		return postrepository.save(post2);
 	}
 }

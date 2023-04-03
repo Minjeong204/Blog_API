@@ -27,6 +27,12 @@ public class Postcontroller {
 
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
+	@PostMapping(path = "/find")
+	public ResponseEntity<Object> find(@RequestBody Post post) {
+		postservice.find(post);
+		
+		return new ResponseEntity<Object>(postservice.find(post),HttpStatus.OK);
+	}
 
 	@GetMapping(path = "/main")
 	public ResponseEntity<Object> viewPost() {
@@ -38,5 +44,16 @@ public class Postcontroller {
 	public ResponseEntity<Object> category1(@PathVariable("category") String category) {
 
 		return new ResponseEntity<Object>(postservice.diary(category), HttpStatus.OK);
+	}
+
+	@PostMapping(path = "/delete")
+	public ResponseEntity<?> del(@RequestBody Post post) {
+		postservice.delete(post);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	@PostMapping(path = "/modify")
+	public ResponseEntity<?> edit(@RequestBody Post post) {
+		postservice.update(post);
+		return new ResponseEntity(HttpStatus.OK);
 	}
 }
